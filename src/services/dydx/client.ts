@@ -22,6 +22,16 @@ class DYDXConnector {
 			return;
 		}
 
+		if(!process.env.DYDX_HOST){
+			console.log('HOST is not set as environment variable');
+			return;
+		}
+
+		if(!process.env.DYDX_CHAIN_ID){
+			console.log('chain_id is not set as environment variable');
+			return;
+		}
+
 		const apiKeys = {
 			key: process.env.API_KEY,
 			passphrase: process.env.API_PASSPHRASE,
@@ -33,9 +43,9 @@ class DYDXConnector {
 			privateKey: process.env.STARK_PRIVATE_KEY
 		};
 
-		this.client = new DydxClient(config.get('Dydx.Network.host'), {
+		this.client = new DydxClient(process.env.DYDX_HOST , {
 			apiTimeout: 3000,
-			networkId: config.get('Dydx.Network.chainID'),
+			networkId: process.env.DYDX_CHAIN_ID,
 			apiKeyCredentials: apiKeys,
 			starkPrivateKey: starkKeyPair
 		});
