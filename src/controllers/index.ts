@@ -7,6 +7,8 @@ import {
 	getFills,
 	getOrder,
 	getOrders,
+	getTransfers,
+	getPnl,
 	historicalPnl,
 	perpBuildOrderParams,
 	perpCreateOrder,
@@ -97,6 +99,26 @@ router.get('/order/:id', async function mainHandler(req, res) {
 	try {
 		const result = await getOrder(req.params['id']);
 		res.json(result);
+	} catch (error) {
+		res.sendStatus(400);
+	}
+});
+
+router.get('/transfers', async function mainHandler(req, res) {
+	try {
+		const result = await getTransfers();
+		if (!result) res.json([]); 
+		else res.json(result);
+	} catch (error) {
+		res.sendStatus(400);
+	}
+});
+
+router.get('/total-pnl', async function mainHandler(req, res) {
+	try {
+		const result = await getPnl();
+		if (!result) res.json([]); 
+		else res.json(result);
 	} catch (error) {
 		res.sendStatus(400);
 	}
