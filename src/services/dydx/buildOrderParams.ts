@@ -59,7 +59,7 @@ export const dydxBuildOrderParams = async (alertMessage: AlertObject) => {
 
 	let slippagePercentage = 0.05;
 	if (alertMessage.type === OrderType.STOP_LIMIT) {
-		slippagePercentage = 0.1
+		slippagePercentage = 0.5
 	}
 	const minPrice =
 		orderSide == OrderSide.BUY
