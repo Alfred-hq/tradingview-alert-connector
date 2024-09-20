@@ -57,7 +57,10 @@ export const dydxBuildOrderParams = async (alertMessage: AlertObject) => {
 
 	const tickSize = parseFloat(marketsData.markets[market].tickSize);
 
-	const slippagePercentage = 0.05;
+	let slippagePercentage = 0.05;
+	if (alertMessage.type === OrderType.STOP_LIMIT) {
+		slippagePercentage = 0.1
+	}
 	const minPrice =
 		orderSide == OrderSide.BUY
 			? latestPrice * (1 + slippagePercentage)
